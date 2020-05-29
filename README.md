@@ -1,6 +1,6 @@
-# [Flask Dashboard AdminLTE](https://appseed.us/admin-dashboards/flask-dashboard-adminlte)
+# [Flask Dashboard adminlte](https://avicom.ir/admin-dashboards/flask-dashboard-adminlte)
 
-**Open-Source Admin Dashboard** coded in **[Flask Framework](https://palletsprojects.com/p/flask/)** on top of **AdminLTE Dashboard** design (free version) - Provided by **AppSeed** [Web App Generator](https://appseed.us/app-generator).
+**Open-Source Admin Dashboard** coded in **[Flask Framework](https://palletsprojects.com/p/flask/)** on top of **adminlte Dashboard** design (free version) - Provided by **Avin Technologies** [Web App Generator](https://avicom.ir/app-generator).
 
 ## Dashboard Features:
 
@@ -8,7 +8,7 @@
 - SQLAlchemy ORM
 - Session-Based authentication flow (login, register)
 - Forms validation
-- UI Kit: **[AdminLTE Dashboard](https://flask-dashboard-adminlte.appseed.us/login)** (Free version) provided by **ColorLib**
+- UI Kit: **[adminlte Dashboard](https://flask-dashboard-adminlte.avicom.ir/login)** (Free version) provided by **ColorLib**
 - **MIT License**
 - Support: Free support via **Github** and (Paid) **24/7 LIVE Support** via [Discord](https://discord.gg/fZC6hup)
 
@@ -16,9 +16,9 @@
 
 ## Dashboard Links
 
-- [Flask Dashboard AdminLTE](https://appseed.us/admin-dashboards/flask-dashboard-adminlte) - Product page
-- [Flask Dashboard AdminLTE](https://docs.appseed.us/admin-dashboards/flask-dashboard-adminlte) - Documentation
-- [Flask Dashboard AdminLTE](https://flask-dashboard-adminlte.appseed.us/login.html) - LIVE Demo
+- [Flask Dashboard adminlte](https://avicom.ir/admin-dashboards/flask-dashboard-adminlte) - Product page
+- [Flask Dashboard adminlte](https://docs.avicom.ir/admin-dashboards/flask-dashboard-adminlte) - Documentation
+- [Flask Dashboard adminlte](https://flask-dashboard-adminlte.avicom.ir/login.html) - LIVE Demo
 
 <br />
 
@@ -26,9 +26,9 @@
 
 PRO versions include **Premium UI Kits**, Lifetime updates and **24/7 LIVE Support** (via [Discord](https://discord.gg/fZC6hup))
 
-| [Premium Flask Dashboards](https://appseed.us/bundles/flask-admin-dashboards-pro) | [Flask Dashboard Dashkit PRO](https://appseed.us/admin-dashboards/flask-dashboard-dashkit-pro) | [Flask Dashboard Black PRO](https://appseed.us/admin-dashboards/flask-dashboard-black-pro) |
+| [Premium Flask Dashboards](https://avicom.ir/bundles/flask-admin-dashboards-pro) | [Flask Dashboard Dashkit PRO](https://avicom.ir/admin-dashboards/flask-dashboard-dashkit-pro) | [Flask Dashboard Black PRO](https://avicom.ir/admin-dashboards/flask-dashboard-black-pro) |
 | --- | --- | --- |
-| [![Premium Flask Dashboards - Provided by AppSeed.](https://raw.githubusercontent.com/app-generator/static/master/products/flask-dashboard-material-pro-screen.png)](https://appseed.us/bundles/flask-admin-dashboards-pro) | [![Flask Dashboard Dashkit PRO](https://raw.githubusercontent.com/app-generator/static/master/products/flask-dashboard-dashkit-pro-screen.png)](https://appseed.us/admin-dashboards/flask-dashboard-dashkit-pro) | [![Flask Dashboard Black PRO](https://raw.githubusercontent.com/app-generator/static/master/products/flask-dashboard-black-pro-screen.png)](https://appseed.us/admin-dashboards/flask-dashboard-black-pro)
+| [![Premium Flask Dashboards - Provided by Avin Technologies.](https://raw.githubusercontent.com/app-generator/static/master/products/flask-dashboard-material-pro-screen.png)](https://avicom.ir/bundles/flask-admin-dashboards-pro) | [![Flask Dashboard Dashkit PRO](https://raw.githubusercontent.com/app-generator/static/master/products/flask-dashboard-dashkit-pro-screen.png)](https://avicom.ir/admin-dashboards/flask-dashboard-dashkit-pro) | [![Flask Dashboard Black PRO](https://raw.githubusercontent.com/app-generator/static/master/products/flask-dashboard-black-pro-screen.png)](https://avicom.ir/admin-dashboards/flask-dashboard-black-pro)
 
 <br />
 <br />
@@ -165,11 +165,11 @@ A dashboard is a set of pages that are easy to read and offer information to the
 
 <br />
 
-### [AdminLTE Dashboard](https://adminlte.io/)
+### [adminlte Dashboard](https://adminlte.io/)
 
-One of the best open-source admin dashboard & control panel theme. Built on top of Bootstrap, AdminLTE provides a range of responsive, reusable, and commonly used components - provided by **ColorLib**.
+One of the best open-source admin dashboard & control panel theme. Built on top of Bootstrap, adminlte provides a range of responsive, reusable, and commonly used components - provided by **ColorLib**.
 
 <br />
 
 ---
-[Flask Dashboard AdminLTE](https://appseed.us/admin-dashboards/flask-dashboard-adminlte) - Provided by **AppSeed** [Web App Generator](https://appseed.us/app-generator).
+[Flask Dashboard adminlte](https://avicom.ir/admin-dashboards/flask-dashboard-adminlte) - Provided by **Avin Technologies** [Web App Generator](https://avicom.ir/app-generator).

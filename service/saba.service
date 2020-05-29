@@ -1,0 +1,15 @@
+[Unit]
+Description=Gunicorn instance to serve Saba Analitics
+After=network.target
+ 
+[Service]
+User=avin
+Group=www-data
+WorkingDirectory=/home/avin/Saba
+Environment="PATH=/home/avin/Saba/env/bin"
+ExecStart=/home/avin/Saba/env/bin/gunicorn --workers 3 --bind unix:saba.sock -m 007 run:app --access-logfile /home/avin/Saba/access.log --error-logfile /home/avin/Saba/error.log --timeout 90
+ 
+[Install]
+WantedBy=multi-user.target
+
+

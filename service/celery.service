@@ -1,0 +1,15 @@
+[Unit]
+Description=Celery instance to serve Saba Analitics
+After=network.target
+ 
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/home/avin/Saba
+Environment="PATH=/home/avin/Saba/env/bin"
+ExecStart=/home/avin/Saba/env/bin/celery worker -A run.celery --loglevel=info --logfile=/home/avin/Saba/celery.log --max-tasks-per-child=20
+ 
+[Install]
+WantedBy=multi-user.target
+
+

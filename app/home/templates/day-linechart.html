@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel='icon' href='/static/favicon.ico' type='image/x-icon'/ >
+
+  <title>Saba {% block title %} {% endblock %} | Avin Technologies</title>
+
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="/static/assets/ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <!-- adminlte Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/static/assets/css/skins/_all-skins.min.css">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="/static/assets/css/morris.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="/static/assets/css/jquery-jvectormap.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="/static/assets/css/bootstrap-datepicker.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="/static/assets/css/daterangepicker.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="/static/assets/css/bootstrap3-wysihtml5.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Emotion analytics: Last 24 hour</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="chart">
+                                    <canvas id="lineChartDay" style="height:250px"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="chart-responsive">
+                                    <canvas id="emotionsChartDay" height="148" style="margin-top: 2em;"></canvas>
+                                </div>
+                                <!-- ./chart-responsive -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-1">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle-o text-red"></i> Angry</li>
+                                    <li><i class="fa fa-circle-o text-green"></i> Happy</li>
+                                    <li><i class="fa fa-circle-o text-yellow"></i> Fear</li>
+                                    <li><i class="fa fa-circle-o text-aqua"></i> Neutral</li>
+                                    <li><i class="fa fa-circle-o text-gray"></i> Sad</li>
+                                </ul>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock content %}
+
+{% include "site_template/scripts.html" %}
+
+{% block javascripts %}
+
+    <!-- ChartJS -->
+    <script src="/static/assets/js/chart.js"></script>
+
+    <!-- adminlte for demo purposes -->
+    <script src="/static/assets/js/demo.js"></script>
+
+    <script>
+        $(function () {
+            {# Line chart week #}
+            var lineChartData = {
+              labels  : {{ day_data['intervals'] }},
+              datasets: [
+                {
+                  label               : 'Angry',
+                  fillColor           : 'rgb(245,105,84)',
+                  strokeColor         : 'rgb(245,105,84)',
+                  pointColor          : 'rgb(245,105,84)',
+                  pointStrokeColor    : '#f56954',
+                  pointHighlightFill  : '#f56954',
+                  pointHighlightStroke: 'rgb(245,105,84)',
+                  data                : {{ day_data['angries'] }}
+                },
+                {
+                  label               : 'Happy',
+                  fillColor           : 'rgba(0,166,90,0.9)',
+                  strokeColor         : 'rgba(0,166,90,0.8)',
+                  pointColor          : '#00a65a',
+                  pointStrokeColor    : 'rgba(0,166,90,0.9)',
+                  pointHighlightFill  : '#00a65a',
+                  pointHighlightStroke: 'rgba(0,166,90,0.9)',
+                  data                : {{ day_data['happies'] }}
+                },
+                {
+                  label               : 'Sad',
+                  fillColor           : 'rgba(0,192,239,0.9)',
+                  strokeColor         : 'rgba(0,207,239,0.8)',
+                  pointColor          : '#00c0ef',
+                  pointStrokeColor    : 'rgba(0,192,239,0.9)',
+                  pointHighlightFill  : '#00c0ef',
+                  pointHighlightStroke: 'rgba(0,192,239,0.9)',
+                  data                : {{ day_data['sads'] }}
+                },
+                {
+                  label               : 'Fear',
+                  fillColor           : 'rgba(243,156,18,0.9)',
+                  strokeColor         : 'rgba(243,156,18,0.8)',
+                  pointColor          : '#f39c12',
+                  pointStrokeColor    : 'rgba(243,156,18,0.9)',
+                  pointHighlightFill  : '#f39c12',
+                  pointHighlightStroke: 'rgba(243,156,18,0.9)',
+                  data                : {{ day_data['fears'] }}
+                },
+                {
+                  label               : 'Neutral',
+                  fillColor           : 'rgba(210,214,222,0.9)',
+                  strokeColor         : 'rgba(210,214,222,0.8)',
+                  pointColor          : '#d2d6de',
+                  pointStrokeColor    : 'rgba(210,214,222,0.8)',
+                  pointHighlightFill  : '#fff',
+                  pointHighlightStroke: 'rgba(210,214,222,0.8)',
+                  data                : {{ day_data['neutrals'] }}
+                }
+              ]
+            }
+
+            var lineChartOptions = {
+              //Boolean - If we should show the scale at all
+              showScale               : true,
+              //Boolean - Whether grid lines are shown across the chart
+              scaleShowGridLines      : false,
+              //String - Colour of the grid lines
+              scaleGridLineColor      : 'rgba(0,0,0,.05)',
+              //Number - Width of the grid lines
+              scaleGridLineWidth      : 1,
+              //Boolean - Whether to show horizontal lines (except X axis)
+              scaleShowHorizontalLines: true,
+              //Boolean - Whether to show vertical lines (except Y axis)
+              scaleShowVerticalLines  : true,
+              //Boolean - Whether the line is curved between points
+              bezierCurve             : true,
+              //Number - Tension of the bezier curve between points
+              bezierCurveTension      : 0.3,
+              //Boolean - Whether to show a dot for each point
+              pointDot                : false,
+              //Number - Radius of each point dot in pixels
+              pointDotRadius          : 4,
+              //Number - Pixel width of point dot stroke
+              pointDotStrokeWidth     : 1,
+              //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+              pointHitDetectionRadius : 20,
+              //Boolean - Whether to show a stroke for datasets
+              datasetStroke           : true,
+              //Number - Pixel width of dataset stroke
+              datasetStrokeWidth      : 2,
+              //Boolean - Whether to fill the dataset with a color
+              datasetFill             : true,
+              //String - A legend template
+              legendTemplate          : 'Dummy',
+              //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+              maintainAspectRatio     : true,
+              //Boolean - whether to make the chart responsive to window resizing
+              responsive              : true
+            }
+
+            var lineChartCanvas          = $('#lineChartDay').get(0).getContext('2d')
+            var lineChart                = new Chart(lineChartCanvas)
+            var lineChartOptions         = lineChartOptions
+            lineChartOptions.datasetFill = false
+            lineChart.Line(lineChartData, lineChartOptions)
+
+            {# Pi chart week #}
+            var pieChartCanvas = $('#emotionsChartDay').get(0).getContext('2d');
+            var pieChart = new Chart(pieChartCanvas);
+            var PieData = [
+                {
+                    value: Math.round({{ day_data['angry'] }}),
+                    color    : '#f56954',
+                    highlight : '#f56954',
+                    label : 'Angry'
+                },
+                {
+                    value    : Math.round({{ day_data['happy'] }}),
+                    color    : '#00a65a',
+                    highlight   : '#00a65a',
+                    label : 'Happy'
+                },
+                {
+                    value    : Math.round({{ day_data['fear'] }}),
+                    color    : '#f39c12',
+                    highlight : '#f39c12',
+                    label : 'Fear'
+                },
+                {
+                    value    : Math.round({{ day_data['neutral'] }}),
+                    color    : '#00c0ef',
+                    highlight : '#00c0ef',
+                    label : 'Neutral'
+                }
+                ,
+                {
+                    value    : Math.round({{ day_data['sad'] }}),
+                    color    : '#d2d6de',
+                    highlight : '#d2d6de',
+                    label : 'Sad'
+                }
+            ];
+
+            var pieOptions = {
+                // Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke: true,
+                // String - The colour of each segment stroke
+                segmentStrokeColor: '#fff',
+                // Number - The width of each segment stroke
+                segmentStrokeWidth: 1,
+                // Number - The percentage of the chart that we cut out of the middle
+                percentageInnerCutout: 50, // This is 0 for Pie charts
+                // Number - Amount of animation steps
+                animationSteps: 100,
+                // String - Animation easing effect
+                animationEasing: 'easeOutBounce',
+                // Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate: true,
+                // Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale: false,
+                // Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+                // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                // String - A tooltip template
+                tooltipTemplate: '<%=value %>% <%=label%> users'
+            };
+
+            // Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            pieChart.Doughnut(PieData, pieOptions);
+        });
+
+    </script>
+
+{% endblock %}
+
+</html>

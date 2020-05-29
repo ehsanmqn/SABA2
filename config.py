@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 License: MIT
-Copyright (c) 2019 - present AppSeed.us
+Copyright (c) 2019 - present Avin Technologies
 """
 
 import os
@@ -14,10 +14,30 @@ class Config(object):
     SECRET_KEY = 'key'
 
     # This will create a file in <app> FOLDER
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
+    #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
+
+    # Mysql database
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@{}:{}/{}'.format(
+        environ.get('APPSEED_DATABASE_USER', 'root'),
+        environ.get('APPSEED_DATABASE_PASSWORD', '855020180me'),
+        environ.get('APPSEED_DATABASE_HOST', '192.168.25.49'),
+        environ.get('APPSEED_DATABASE_PORT', 3306),
+        environ.get('APPSEED_DATABASE_NAME', 'saba')
+    )
+
+    # PostgreSQL database
+    # SQLALCHEMY_DATABASE_URI = 'postgresql://{}:{}@{}:{}/{}'.format(
+    #     environ.get('APPSEED_DATABASE_USER', 'root'),
+    #     environ.get('APPSEED_DATABASE_PASSWORD', '855020180me'),
+    #     environ.get('APPSEED_DATABASE_HOST', 'localhost'),
+    #     environ.get('APPSEED_DATABASE_PORT', 5432),
+    #     environ.get('APPSEED_DATABASE_NAME', 'saba')
+    # )
 
     # For 'in memory' database, please use:
     # SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    CELERY_BROKER_URL = 'redis://localhost:6379/0'
+    CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
@@ -38,11 +58,11 @@ class ProductionConfig(Config):
 
     # PostgreSQL database
     SQLALCHEMY_DATABASE_URI = 'postgresql://{}:{}@{}:{}/{}'.format(
-        environ.get('APPSEED_DATABASE_USER', 'appseed'),
-        environ.get('APPSEED_DATABASE_PASSWORD', 'appseed'),
-        environ.get('APPSEED_DATABASE_HOST', 'db'),
+        environ.get('APPSEED_DATABASE_USER', 'root'),
+        environ.get('APPSEED_DATABASE_PASSWORD', '855020180me'),
+        environ.get('APPSEED_DATABASE_HOST', 'avin'),
         environ.get('APPSEED_DATABASE_PORT', 5432),
-        environ.get('APPSEED_DATABASE_NAME', 'appseed')
+        environ.get('APPSEED_DATABASE_NAME', 'saba')
     )
 
 

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel='icon' href='/static/favicon.ico' type='image/x-icon'/ >
+
+  <title>Saba {% block title %} {% endblock %} | Avin Technologies</title>
+
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.7 -->
+  <link rel="stylesheet" href="/static/assets/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="/static/assets/ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <!-- adminlte Skins. Choose a skin from the css/skins
+       folder instead of downloading all of them to reduce the load. -->
+  <link rel="stylesheet" href="/static/assets/css/skins/_all-skins.min.css">
+  <!-- Morris chart -->
+  <link rel="stylesheet" href="/static/assets/css/morris.css">
+  <!-- jvectormap -->
+  <link rel="stylesheet" href="/static/assets/css/jquery-jvectormap.css">
+  <!-- Date Picker -->
+  <link rel="stylesheet" href="/static/assets/css/bootstrap-datepicker.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="/static/assets/css/daterangepicker.css">
+  <!-- bootstrap wysihtml5 - text editor -->
+  <link rel="stylesheet" href="/static/assets/css/bootstrap3-wysihtml5.min.css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+  <!-- Google Font -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+{% block content %}
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Emotion analytucs: Day, Week, Month and Year</h3>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                    class="fa fa-minus"></i>
+                            </button>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i
+                                    class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-2" style="margin: 2em;">
+                                <div>
+                                    <b>Day</b>
+                                </div>
+                                <div class="chart-responsive">
+                                    <canvas id="emotionsChartDay" height="148" style="margin-top: 2em;"></canvas>
+                                </div>
+
+                                <!-- ./chart-responsive -->
+                            </div>
+                            <div class="col-md-2" style="margin: 2em;">
+                                <div>
+                                    <b>Week</b>
+                                </div>
+                                <div class="chart-responsive">
+                                    <canvas id="emotionsChart7Day" height="148" style="margin-top: 2em;">
+                                    </canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="margin: 2em;">
+                                <div>
+                                    <b>Month</b>
+                                </div>
+                                <div class="chart-responsive">
+                                    <canvas id="emotionsChart30Day" height="148" style="margin-top: 2em;">
+                                    </canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="margin: 2em;">
+                                <div>
+                                    <b>Year</b>
+                                </div>
+                                <div class="chart-responsive">
+                                    <canvas id="emotionsChartYear" height="148" style="margin-top: 2em;">
+                                    </canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <ul class="chart-legend clearfix">
+                                    <li><i class="fa fa-circle-o text-red"></i> Angry</li>
+                                    <li><i class="fa fa-circle-o text-green"></i> Happy</li>
+                                    <li><i class="fa fa-circle-o text-yellow"></i> Fear</li>
+                                    <li><i class="fa fa-circle-o text-aqua"></i> Neutral</li>
+                                    <li><i class="fa fa-circle-o text-gray"></i> Sad</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock content %}
+
+{% include "site_template/scripts.html" %}
+
+{% block javascripts %}
+
+    <!-- ChartJS -->
+    <script src="/static/assets/js/chart.js"></script>
+
+    <!-- adminlte for demo purposes -->
+    <script src="/static/assets/js/demo.js"></script>
+
+    <script>
+        $(function () {
+            {# Pi chart week #}
+            var pieChartCanvas = $('#emotionsChartDay').get(0).getContext('2d');
+            var pieChart = new Chart(pieChartCanvas);
+            var PieData = [
+                {
+                    value: Math.round({{ pie_chart_data['day']['angry'] }}),
+                    color    : '#f56954',
+                    highlight : '#f56954',
+                    label : 'Angry'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['day']['happy']}}),
+                    color    : '#00a65a',
+                    highlight   : '#00a65a',
+                    label : 'Happy'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['day']['fear'] }}),
+                    color    : '#f39c12',
+                    highlight : '#f39c12',
+                    label : 'Fear'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['day']['neutral'] }}),
+                    color    : '#00c0ef',
+                    highlight : '#00c0ef',
+                    label : 'Neutral'
+                }
+                ,
+                {
+                    value    : Math.round({{ pie_chart_data['day']['sad'] }}),
+                    color    : '#d2d6de',
+                    highlight : '#d2d6de',
+                    label : 'Sad'
+                }
+            ];
+
+            var pieOptions = {
+                // Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke: true,
+                // String - The colour of each segment stroke
+                segmentStrokeColor: '#fff',
+                // Number - The width of each segment stroke
+                segmentStrokeWidth: 1,
+                // Number - The percentage of the chart that we cut out of the middle
+                percentageInnerCutout: 50, // This is 0 for Pie charts
+                // Number - Amount of animation steps
+                animationSteps: 100,
+                // String - Animation easing effect
+                animationEasing: 'easeOutBounce',
+                // Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate: true,
+                // Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale: false,
+                // Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+                // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                // String - A tooltip template
+                tooltipTemplate: '<%=value %>% <%=label%> users'
+            };
+
+            // Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            pieChart.Doughnut(PieData, pieOptions);
+        });
+
+        $(function () {
+            {# Pi chart week #}
+            var pieChartCanvas = $('#emotionsChart7Day').get(0).getContext('2d');
+            var pieChart = new Chart(pieChartCanvas);
+            var PieData = [
+                {
+                    value: Math.round({{ pie_chart_data['week']['angry'] }}),
+                    color    : '#f56954',
+                    highlight : '#f56954',
+                    label : 'Angry'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['week']['happy'] }}),
+                    color    : '#00a65a',
+                    highlight   : '#00a65a',
+                    label : 'Happy'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['week']['fear'] }}),
+                    color    : '#f39c12',
+                    highlight : '#f39c12',
+                    label : 'Fear'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['week']['neutral'] }}),
+                    color    : '#00c0ef',
+                    highlight : '#00c0ef',
+                    label : 'Neutral'
+                }
+                ,
+                {
+                    value    : Math.round({{ pie_chart_data['week']['sad'] }}),
+                    color    : '#d2d6de',
+                    highlight : '#d2d6de',
+                    label : 'Sad'
+                }
+            ];
+
+            var pieOptions = {
+                // Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke: true,
+                // String - The colour of each segment stroke
+                segmentStrokeColor: '#fff',
+                // Number - The width of each segment stroke
+                segmentStrokeWidth: 1,
+                // Number - The percentage of the chart that we cut out of the middle
+                percentageInnerCutout: 50, // This is 0 for Pie charts
+                // Number - Amount of animation steps
+                animationSteps: 100,
+                // String - Animation easing effect
+                animationEasing: 'easeOutBounce',
+                // Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate: true,
+                // Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale: false,
+                // Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+                // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                // String - A tooltip template
+                tooltipTemplate: '<%=value %>% <%=label%> users'
+            };
+
+            // Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            pieChart.Doughnut(PieData, pieOptions);
+        });
+
+        $(function () {
+            var pieChartCanvas = $('#emotionsChart30Day').get(0).getContext('2d');
+            var pieChart = new Chart(pieChartCanvas);
+            var PieData = [
+                {
+                    value: Math.round({{ pie_chart_data['month']['angry'] }}),
+                    color    : '#f56954',
+                    highlight : '#f56954',
+                    label : 'Angry'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['month']['happy'] }}),
+                    color    : '#00a65a',
+                    highlight   : '#00a65a',
+                    label : 'Happy'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['month']['fear'] }}),
+                    color    : '#f39c12',
+                    highlight : '#f39c12',
+                    label : 'Fear'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['month']['neutral'] }}),
+                    color    : '#00c0ef',
+                    highlight : '#00c0ef',
+                    label : 'Neutral'
+                }
+                ,
+                {
+                    value    : Math.round({{ pie_chart_data['month']['sad'] }}),
+                    color    : '#d2d6de',
+                    highlight : '#d2d6de',
+                    label : 'Sad'
+                }
+            ];
+
+            var pieOptions = {
+                // Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke: true,
+                // String - The colour of each segment stroke
+                segmentStrokeColor: '#fff',
+                // Number - The width of each segment stroke
+                segmentStrokeWidth: 1,
+                // Number - The percentage of the chart that we cut out of the middle
+                percentageInnerCutout: 50, // This is 0 for Pie charts
+                // Number - Amount of animation steps
+                animationSteps: 100,
+                // String - Animation easing effect
+                animationEasing: 'easeOutBounce',
+                // Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate: true,
+                // Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale: false,
+                // Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+                // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                // String - A tooltip template
+                tooltipTemplate: '<%=value %>% <%=label%> users'
+            };
+
+            // Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            pieChart.Doughnut(PieData, pieOptions);
+        });
+
+        $(function () {
+            var pieChartCanvas = $('#emotionsChartYear').get(0).getContext('2d');
+            var pieChart = new Chart(pieChartCanvas);
+            var PieData = [
+                {
+                    value: Math.round({{ pie_chart_data['year']['angry'] }}),
+                    color    : '#f56954',
+                    highlight : '#f56954',
+                    label : 'Angry'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['year']['happy'] }}),
+                    color    : '#00a65a',
+                    highlight   : '#00a65a',
+                    label : 'Happy'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['year']['fear'] }}),
+                    color    : '#f39c12',
+                    highlight : '#f39c12',
+                    label : 'Fear'
+                },
+                {
+                    value    : Math.round({{ pie_chart_data['year']['neutral'] }}),
+                    color    : '#00c0ef',
+                    highlight : '#00c0ef',
+                    label : 'Neutral'
+                }
+                ,
+                {
+                    value    : Math.round({{ pie_chart_data['year']['sad'] }}),
+                    color    : '#d2d6de',
+                    highlight : '#d2d6de',
+                    label : 'Sad'
+                }
+            ];
+
+            var pieOptions = {
+                // Boolean - Whether we should show a stroke on each segment
+                segmentShowStroke: true,
+                // String - The colour of each segment stroke
+                segmentStrokeColor: '#fff',
+                // Number - The width of each segment stroke
+                segmentStrokeWidth: 1,
+                // Number - The percentage of the chart that we cut out of the middle
+                percentageInnerCutout: 50, // This is 0 for Pie charts
+                // Number - Amount of animation steps
+                animationSteps: 100,
+                // String - Animation easing effect
+                animationEasing: 'easeOutBounce',
+                // Boolean - Whether we animate the rotation of the Doughnut
+                animateRotate: true,
+                // Boolean - Whether we animate scaling the Doughnut from the centre
+                animateScale: false,
+                // Boolean - whether to make the chart responsive to window resizing
+                responsive: true,
+                // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+                maintainAspectRatio: false,
+                // String - A tooltip template
+                tooltipTemplate: '<%=value %>% <%=label%> users'
+            };
+
+            // Create pie or douhnut chart
+            // You can switch between pie and douhnut using the method below.
+            pieChart.Doughnut(PieData, pieOptions);
+        });
+
+    </script>
+
+{% endblock %}
+
+</html>

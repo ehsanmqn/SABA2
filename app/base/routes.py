@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 License: MIT
-Copyright (c) 2019 - present AppSeed.us
+Copyright (c) 2019 - present Avin Technologies
 """
 
 from flask import jsonify, render_template, redirect, request, url_for

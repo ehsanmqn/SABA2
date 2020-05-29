@@ -184,9 +184,9 @@ $(function () {
     resize   : true,
     colors   : ['#3c8dbc', '#f56954', '#00a65a'],
     data     : [
-      { label: 'Download Sales', value: 12 },
-      { label: 'In-Store Sales', value: 30 },
-      { label: 'Mail-Order Sales', value: 20 }
+      { label: 'Answered calls', value: 83 },
+      { label: 'Lost calls', value:  10},
+      { label: 'Routed calls', value: 78 }
     ],
     hideHover: 'auto'
   });
@@ -197,15 +197,4 @@ $(function () {
     donut.redraw();
     line.redraw();
   });
-
-  /* The todo list plugin */
-  $('.todo-list').todoList({
-    onCheck  : function () {
-      window.console.log($(this), 'The element has been checked');
-    },
-    onUnCheck: function () {
-      window.console.log($(this), 'The element has been unchecked');
-    }
-  });
-
 });

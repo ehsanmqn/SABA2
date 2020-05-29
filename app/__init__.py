@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 License: MIT
-Copyright (c) 2019 - present AppSeed.us
+Copyright (c) 2019 - present Avin Technologies
 """
 
 from flask import Flask, url_for
@@ -10,6 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 from importlib import import_module
 from logging import basicConfig, DEBUG, getLogger, StreamHandler
 from os import path
+from celery import Celery
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -82,3 +83,15 @@ def create_app(config, selenium=False):
     configure_logs(app)
     apply_themes(app)
     return app
+
+def create_celery(app):
+    celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'], backend=app.config['CELERY_RESULT_BACKEND'])
+    celery.conf.update(app.config)
+    TaskBase = celery.Task
+    class ContextTask(TaskBase):
+        abstract = True
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return TaskBase.__call__(self, *args, **kwargs)
+    celery.Task = ContextTask
+    return celery

@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 Flask Boilerplate Dashboard
-Author: AppSeed.us - App Generator 
+Author: Avin Technologies - App Generator
 License: MIT
 """
 

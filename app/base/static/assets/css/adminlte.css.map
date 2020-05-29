@@ -2,7 +2,7 @@
 	"version": 3,
 	"file": "adminlte.css",
 	"sources": [
-		"../../build/scss/AdminLTE.scss",
+		"../../build/scss/adminlte.scss",
 		"../../build/scss/_bootstrap_variables.scss",
 		"../../bower_components/bootstrap/scss/bootstrap.scss",
 		"../../bower_components/bootstrap/scss/_variables.scss",
