@@ -294,7 +294,7 @@ class AnalyticsModel(db.Model):
         start = datetime(year=now.year, month=now.month, day=now.day, hour=now.hour)
         end = start - timedelta(1)
 
-        Q_day = AnalyticsModel.query.filter(AnalyticsModel.time < start).filter(AnalyticsModel.time > end)
+        Q_day = AnalyticsModel.query.filter(AnalyticsModel.time < start).filter(AnalyticsModel.time > end).yield_per(100).limit(1000000)
 
         day_calls_number = Q_day.count()
 
