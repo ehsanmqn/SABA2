@@ -31,6 +31,11 @@ def predict_api():
 
     return {'request': 'success', 'message': 'File inserted into process queue'}
 
+# 
+# Analysis function
+# Given filename and path, this functions processes the audio file to determine which emotion class
+# it blonged to
+# 
 @celery.task(name='run.predict')
 def predict(filename=None, callcenter=None):
     return resources.EmotionAnalysis().predict(filename=filename, callcenter=callcenter)
