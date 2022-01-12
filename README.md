@@ -1,12 +1,12 @@
-# SABA2 Vocal Emotion Analysis System with [Flask Dashboard adminlte](https://avicom.ir/admin-dashboards/flask-dashboard-adminlte)
+# Vocal Emotion Recognition System with [Dashboard](https://github.com/app-generator/flask-adminlte)
 
-This project provides an emotion recognition system API with analytics dasboard. Using provided APIs, clients request for analysis of a speech file. The server process the file, return back results to the client, and save the results into the database. SABA's dashboard provides commulative analytics using data stored in database. 
+This project provides an emotion recognition system API with analytics dasboard. Using the provided APIs, clients are able request for analysis of a speech file. The server processes the audio file, returns back results to the client. SABA's dashboard provides analytics from data stored in database. 
 
-Following picture shows SABA's dashboard.
+Following picture illustrates SABA's dashboard. In this case, more than 13000 phone calls processed. The chart cearly depicts trend of each category over the time. Some other charts also provided in the dashboard.
 
 ![image](saba.png)
 
-NOTE: Fetching data from database does not implemented in an efficient way. Therefore, in cases that too many records be saved in database, you will encounter with delay when opening the dashbord. I implemented this project when I was in early stages of learning FLASK; So forgive me for this problem.
+NOTE: Quering data from database does not implemented in an efficient way. Therefore, in cases that too many records be saved in database, you will encounter with delay when opening the dashbord. I implemented this project when I was in early stages of learning FLASK; forgive me for this problem.
 
 ## Build from sources
 
