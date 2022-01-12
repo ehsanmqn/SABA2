@@ -6,4 +6,4 @@ flask_sqlalchemy
 gunicorn
 flask-restful
 scipy
-
+celery

@@ -23,7 +23,6 @@ class AllAnalytics(Resource):
         return AnalyticsModel.prepare_emotions_page_data(start_date=start_date, end_date=end_date)
 
 
-
 class TodayAnalytics(Resource):
 
     def prepare_day_analytics(self):
@@ -44,6 +43,7 @@ class LastMonthAnalytics(Resource):
     def prepare_month_analytics(self):
         return AnalyticsModel.prepare_month_analytics()
 
+
 class LastYearAnalytics(Resource):
 
     def prepare_year_analytics(self):
@@ -51,35 +51,15 @@ class LastYearAnalytics(Resource):
 
 
 class EmotionAnalysis():
-    def predict(self, filename, callcenter):
+    def predict(self, filename, caller=None, callee=None):
         rec_dir = ""
-        with open(os.path.join(APP_STATIC, 'saba.conf')) as f:
-            rec_dir = f.read()
-
-        if not os.path.isdir(rec_dir[:-1]):
-            return {'request': 'failed', 'message': 'Directory not found'}, 500
-
-        ext = filename[-3:]
-        if (ext == "mp3" or ext == "WAV" or ext == "wav" or ext == "Wav"):
-            filename = filename[:-4] + '-audio-in'
-
-        if (filename[0] == "/"):
-            filename = callcenter + '/rec/saba/' + filename[17:] + ".wav"
-        else:
-            filename = filename + ".wav"
 
         # Check for file existence
         if not os.path.isfile(os.path.join(rec_dir, filename)):
             # This line added because some files saved with .WAV extension
 
-            filename = filename[:-3] + "WAV"
-            # print(filename)
             if not os.path.isfile(os.path.join(rec_dir, filename)):
                 return {'request': 'failed', 'message': 'File {} not found'.format(filename)}, 400
-
-        # Check for redunduncy
-        if AnalyticsModel.find_by_filename(filename):
-            return {'request': 'failed', 'message': 'File {} already exists'.format(filename)}, 400
 
         result = process.model1GetResultForAVA(os.path.join(rec_dir, filename))
 
@@ -87,11 +67,6 @@ class EmotionAnalysis():
             emotions = result['result'][0]
         except:
             return {'request': 'failed', 'message': 'Unknown problem in emotion recognition'.format(filename)}, 400
-
-
-        separated = filename.split('-')
-        caller = separated[1]
-        callee = separated[2]
 
         parsed_phone = process.parse_phone_number(caller)
 
@@ -109,7 +84,7 @@ class EmotionAnalysis():
             type=parsed_phone['type'],
             location=parsed_phone['region'],
             operator=parsed_phone['operator'],
-            callcenter=callcenter
+            callcenter=""
         )
 
         try:

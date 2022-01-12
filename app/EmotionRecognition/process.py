@@ -17,6 +17,7 @@ from flask import jsonify
 # Load model 1
 Vokaturi.load("app/EmotionRecognition/emotion-lib-linux64.so")
 
+
 def voiceSelection(file_name):
 	# Reading sound file
 	# file_name = sys.argv[1]
@@ -41,6 +42,7 @@ def voiceSelection(file_name):
 	# print ("Extracting emotions...")
 	return voice
 
+
 def model1GetNeutral(voice_Selection):
 	quality = Vokaturi.Quality()
 	emotionProbabilities = Vokaturi.EmotionProbabilities()
@@ -51,6 +53,8 @@ def model1GetNeutral(voice_Selection):
 	else:
 		print ("Not enough sonorancy to determine emotions")
 	return
+
+
 def model1GetHappy(voice_Selection):
 	quality = Vokaturi.Quality()
 	emotionProbabilities = Vokaturi.EmotionProbabilities()
@@ -61,6 +65,8 @@ def model1GetHappy(voice_Selection):
 	else:
 		print ("Not enough sonorancy to determine emotions")
 	return
+
+
 def model1GetSad(voice_Selection):
 	quality = Vokaturi.Quality()
 	emotionProbabilities = Vokaturi.EmotionProbabilities()
@@ -71,6 +77,8 @@ def model1GetSad(voice_Selection):
 	else:
 		print ("Not enough sonorancy to determine emotions")
 	return
+
+
 def model1GetAngry(voice_Selection):
 	quality = Vokaturi.Quality()
 	emotionProbabilities = Vokaturi.EmotionProbabilities()
@@ -82,6 +90,7 @@ def model1GetAngry(voice_Selection):
 		print ("Not enough sonorancy to determine emotions")
 	return
 
+
 def model1GetFear(voice_Selection):
 	quality = Vokaturi.Quality()
 	emotionProbabilities = Vokaturi.EmotionProbabilities()
@@ -92,6 +101,7 @@ def model1GetFear(voice_Selection):
 	else:
 		print ("Not enough sonorancy to determine emotions")
 	return
+
 
 def model1GetResult(voice_Selection):
 	quality = Vokaturi.Quality()
@@ -112,6 +122,7 @@ def model1GetResult(voice_Selection):
 	else:
 		result_of={"request":"null", "result":[]}
 	return result_of
+
 
 def model1GetResultForAVA(voice_Selection):
 	quality = Vokaturi.Quality()
@@ -137,6 +148,7 @@ def model1GetResultForAVA(voice_Selection):
 		result_of={"request":"null", "result":[]}
 	return result_of
 	
+
 def softmax(emotions):
 	index = emotions.index(max(emotions))
 	if(index == 0):
@@ -149,6 +161,7 @@ def softmax(emotions):
 		return 'S'
 	elif(index == 4):
 		return 'F'
+
 
 def parse_phone_number(phone):
     fixed_regions = {

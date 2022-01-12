@@ -35,10 +35,12 @@ def predict_api():
 # Analysis function
 # Given filename and path, this functions processes the audio file to determine which emotion class
 # it blonged to
+# filename: filename
+# callcenter: file path
 # 
 @celery.task(name='run.predict')
 def predict(filename=None, callcenter=None):
-    return resources.EmotionAnalysis().predict(filename=filename, callcenter=callcenter)
+    return resources.EmotionAnalysis().predict(filename=filename)
 
 # Set up api
 # api.add_resource(resources.PredictWithModel1ForShafatel, '/api/predict/model3')
