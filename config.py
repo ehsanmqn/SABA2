@@ -14,16 +14,16 @@ class Config(object):
     SECRET_KEY = 'key'
 
     # This will create a file in <app> FOLDER
-    #SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'database.db')
 
     # Mysql database
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@{}:{}/{}'.format(
-        environ.get('APPSEED_DATABASE_USER', 'root'),
-        environ.get('APPSEED_DATABASE_PASSWORD', '855020180me'),
-        environ.get('APPSEED_DATABASE_HOST', '192.168.25.49'),
-        environ.get('APPSEED_DATABASE_PORT', 3306),
-        environ.get('APPSEED_DATABASE_NAME', 'saba')
-    )
+    # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@{}:{}/{}'.format(
+    #     environ.get('APPSEED_DATABASE_USER', 'USER'),
+    #     environ.get('APPSEED_DATABASE_PASSWORD', 'PASSWORD'),
+    #     environ.get('APPSEED_DATABASE_HOST', 'ADDRESS'),
+    #     environ.get('APPSEED_DATABASE_PORT', 3306),
+    #     environ.get('APPSEED_DATABASE_NAME', 'DB_NAME')
+    # )
 
     # PostgreSQL database
     # SQLALCHEMY_DATABASE_URI = 'postgresql://{}:{}@{}:{}/{}'.format(
