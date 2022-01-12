@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 License: MIT
-Copyright (c) 2019 - present Avin Technologies
+Copyright (c) 2019 - present by Ehsan Maiqani
 """
 
 bind = '0.0.0.0:5005'

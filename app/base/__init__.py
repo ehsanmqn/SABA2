@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 License: MIT
-Copyright (c) 2019 - present Avin Technologies.us
+Copyright (c) 2019 - present by Ehsan Maiqani.us
 """
 
 from flask import Blueprint

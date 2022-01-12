@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 """
 License: MIT
-Copyright (c) 2019 - present Avin Technologies
+Copyright (c) 2019 - present by Ehsan Maiqani
 """
 
 from flask import Flask, url_for
